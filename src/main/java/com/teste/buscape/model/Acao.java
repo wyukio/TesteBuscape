@@ -1,5 +1,5 @@
 package com.teste.buscape.model;
 
-interface Acao {
+public interface Acao {
 	void realizarMovimento(Submarino submarino);
 }

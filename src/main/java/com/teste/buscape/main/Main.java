@@ -14,6 +14,6 @@ public class Main {
 			ControleSubmarino.controlarSubmarino(comando, submarino);
 		}
 		
-		System.out.println(submarino);
+		System.out.print(submarino);
 	}
 }

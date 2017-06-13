@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.teste.buscape.exceptions.ComandoInvalidoException;
 import com.teste.buscape.exceptions.SubmarinoAcimaDoNivelDoMarException;
+import com.teste.buscape.validadores.ValidadorSubmarino;
 
 public class ControleSubmarino {
 	private static final Map<String,Acao> ACOES;
@@ -26,7 +27,6 @@ public class ControleSubmarino {
 		
 		acao.realizarMovimento(submarino);
 		
-		if(submarino.posicao.z > 0)
-			throw new SubmarinoAcimaDoNivelDoMarException();
+		ValidadorSubmarino.valida(submarino);
 	}
 }
