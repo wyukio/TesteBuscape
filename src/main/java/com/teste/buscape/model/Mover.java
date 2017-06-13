@@ -4,8 +4,7 @@ public class Mover implements Acao {
 
 	@Override
 	public void realizarMovimento(Submarino submarino) {
-		// TODO Auto-generated method stub
-
+		submarino.direcao.mover(submarino);
 	}
 
 }
