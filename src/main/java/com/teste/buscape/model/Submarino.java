@@ -1,5 +1,7 @@
 package com.teste.buscape.model;
 
+import java.util.function.Consumer;
+
 public class Submarino {
 	protected Posicao posicao = new Posicao();
 	protected Direcao direcao = Direcao.NORTE;
@@ -8,7 +10,7 @@ public class Submarino {
 	
 	public Submarino(int x, int y, int z, Direcao direcao){
 		this.posicao = new Posicao(x,y,z);
-		this.direcao = direcao;
+		this.direcao = direcao != null ? direcao : Direcao.NORTE;
 	}
 	
 	public Posicao getPosicao() {
@@ -18,7 +20,11 @@ public class Submarino {
 	public Direcao getDirecao() {
 		return direcao;
 	}
-
+	
+	public void mover(Consumer<Submarino> consumer){
+		consumer.accept(this);
+	}
+	
 	@Override
 	public String toString(){
 		return posicao.toString()+" "+direcao.name();

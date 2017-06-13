@@ -8,14 +8,10 @@ import org.junit.rules.ExpectedException;
 
 import com.teste.buscape.exceptions.ComandoInvalidoException;
 import com.teste.buscape.exceptions.SubmarinoAcimaDoNivelDoMarException;
+import com.teste.buscape.exceptions.SubmarinoNaoExistenteException;
 import com.teste.buscape.model.ControleSubmarino;
-import com.teste.buscape.model.Descer;
 import com.teste.buscape.model.Direcao;
-import com.teste.buscape.model.Mover;
-import com.teste.buscape.model.Subir;
 import com.teste.buscape.model.Submarino;
-import com.teste.buscape.model.VirarParaDireita;
-import com.teste.buscape.model.VirarParaEsquerda;
 
 public class TestControleSubmarino {
 	
@@ -32,54 +28,55 @@ public class TestControleSubmarino {
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@Test
-	public void testControleSubir() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleSubir() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		ControleSubmarino.controlarSubmarino(SUBIR, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
-		new Subir().realizarMovimento(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
-		
+		SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY.mover(ControleSubmarino::subir);
 		assertEquals(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
 	}
 
 	@Test
-	public void testControleDescer() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleDescer() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		ControleSubmarino.controlarSubmarino(DESCER, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
-		new Descer().realizarMovimento(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
-		
+		SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY.mover(ControleSubmarino::descer);
 		assertEquals(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
 	}
 
 	@Test
-	public void testControleVirarParaEsquerda() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleVirarParaEsquerda() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		ControleSubmarino.controlarSubmarino(VIRAR_PARA_ESQUERDA, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
-		new VirarParaEsquerda().realizarMovimento(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
-		
+		SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY.mover(ControleSubmarino::virarParaEsquerda);
 		assertEquals(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
 	}
 
 	@Test
-	public void testControleVirarParaDireita() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleVirarParaDireita() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		ControleSubmarino.controlarSubmarino(VIRAR_PARA_DIREITA, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
-		new VirarParaDireita().realizarMovimento(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
-		
+		SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY.mover(ControleSubmarino::virarParaDireita);
 		assertEquals(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
 	}
 	
 	@Test
-	public void testControleMover() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleMover() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		ControleSubmarino.controlarSubmarino(MOVER, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
-		new Mover().realizarMovimento(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
-		
+		SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY.mover(ControleSubmarino::mover);
 		assertEquals(SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE_COPY);
 	}
 	
 	@Test
-	public void testControleInvalido() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleInvalido() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		thrown.expect(ComandoInvalidoException.class);
 		ControleSubmarino.controlarSubmarino(COMANDO_INVALIDO, SUBMARINO_X3_Y4_Z10_NEGATIVO_NORTE);
 	}
 	
 	@Test
-	public void testControleSubmarinoAcimaNivelDoMar() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testControleSubmarinoAcimaNivelDoMar() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		thrown.expect(SubmarinoAcimaDoNivelDoMarException.class);
 		ControleSubmarino.controlarSubmarino(SUBIR, new Submarino());
+	}
+	
+	@Test
+	public void testControleSubmarinoNulo() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
+		thrown.expect(SubmarinoNaoExistenteException.class);
+		ControleSubmarino.controlarSubmarino(SUBIR, null);
 	}
 }

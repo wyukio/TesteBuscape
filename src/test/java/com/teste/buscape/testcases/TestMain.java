@@ -13,6 +13,7 @@ import org.junit.rules.ExpectedException;
 
 import com.teste.buscape.exceptions.ComandoInvalidoException;
 import com.teste.buscape.exceptions.SubmarinoAcimaDoNivelDoMarException;
+import com.teste.buscape.exceptions.SubmarinoNaoExistenteException;
 import com.teste.buscape.main.Main;
 import com.teste.buscape.model.Direcao;
 import com.teste.buscape.model.Submarino;
@@ -45,37 +46,37 @@ public class TestMain {
 	}
 	
 	@Test
-	public void testDoReadMe() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testDoReadMe() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		Main.main(INPUT_README);
 		assertEquals(consoleOutput.toString(), RESULT_README);
 	}
 	
 	@Test
-	public void testDoInput1() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testDoInput1() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		Main.main(INPUT_1);
 		assertEquals(consoleOutput.toString(), RESULT_INPUT_1);
 	}
 	
 	@Test
-	public void testDoInput2() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testDoInput2() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		Main.main(INPUT_2);
 		assertEquals(consoleOutput.toString(), RESULT_INPUT_2);
 	}
 	
 	@Test
-	public void testInput3() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testInput3() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		Main.main(INPUT_3);
 		assertEquals(consoleOutput.toString(), RESULT_INPUT_3);
 	}
 	
 	@Test
-	public void testAcimaDoNivelDoMar() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testAcimaDoNivelDoMar() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		thrown.expect(SubmarinoAcimaDoNivelDoMarException.class);
 		Main.main(INPUT_ACIMA_NIVEL_MAR);
 	}
 	
 	@Test
-	public void testComandoInvalido() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException{
+	public void testComandoInvalido() throws SubmarinoAcimaDoNivelDoMarException, ComandoInvalidoException, SubmarinoNaoExistenteException{
 		thrown.expect(ComandoInvalidoException.class);
 		Main.main(INPUT_COMANDO_INVALIDO);
 	}
